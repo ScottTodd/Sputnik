@@ -10,7 +10,6 @@ class Test_Sample(unittest.TestCase):
     def test_length(self):
         self.assertEqual(len(self.simple_list), 3)
 
-    @unittest.expectedFailure
     def test_failure(self):
         self.assertEqual(1, 2)
 
