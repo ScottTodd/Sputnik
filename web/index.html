@@ -2,8 +2,17 @@
 <html>
 <head>
     <title>Sputnik Web Interface</title>
+
+    <!-- Thirt party styles -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="third-party/bootstrap-material-design/css/ripples.min.css" rel="stylesheet">
+    <link href="third-party/bootstrap-material-design/css/material-wfont.min.css" rel="stylesheet">
+
+    <!-- Sputnik styles -->
     <link rel="stylesheet" type="text/css" href="style/style.css">
-    <script src='third-party/handlebars-v2.0.0.js'></script>
+
+    <!-- Third party scripts -->
+    <script src='third-party/handlebars/handlebars-v2.0.0.js'></script>
 </head>
 <body>
 
@@ -17,10 +26,10 @@
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
 
-    <div id="servers-list"></div>
     <div id="controls">
-        <button onclick="addServer()">Add Server</button>
+        <a href="javascript:addServer()" class="btn btn-primary">Add Server</a>
     </div>
+    <div id="servers-list"></div>
 
     <script>
         var serverEntrySource = "" +
@@ -66,6 +75,19 @@
         }
     </script>
 </div>
+
+<!-- Third party scripts -->
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script src="third-party/bootstrap-material-design/js/ripples.min.js"></script>
+<script src="third-party/bootstrap-material-design/js/material.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.material.init();
+    });
+</script>
 
 </body>
 </html>
