@@ -3,6 +3,7 @@
 <head>
     <title>Sputnik Web Interface</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src='third-party/handlebars-v2.0.0.js'></script>
 </head>
 <body>
 
@@ -16,68 +17,54 @@
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
 
-    <div id="servers-list">
-        <!-- TODO: Populate this list from JavaScript. -->
-        <div class="server-container">
-            <div class="server-title">Server</div>
-            <form>
-                <div class="input-title">Server Name:</div>
-                <input type="text" name="servername" placeholder="Freenode">
-
-                <div class="input-title">Server Address:</div>
-                <input type="text" name="serveraddress" placeholder="irc.freenode.net">
-
-                <div class="input-title">Nickname:</div>
-                <input type="text" name="nickname">
-
-                <div class="input-title">Alt Nickname:</div>
-                <input type="text" name="altnickname">
-
-                <div class="input-title">Ident:</div>
-                <input type="text" name="ident">
-            </form>
-        </div>
-
-        <div class="server-container server-container-disabled">
-            <div class="server-title">Server (edit disabled)</div>
-            <form>
-                <div class="input-title">Server Name:</div>
-                <input type="text" name="servername" class="disabled" value="test servername" disabled>
-
-                <div class="input-title">Server Address:</div>
-                <input type="text" name="serveraddress" class="disabled" value="test serveraddress" disabled>
-
-                <div class="input-title">Nickname:</div>
-                <input type="text" name="nickname" class="disabled" value="test nickname" disabled>
-
-                <div class="input-title">Alt Nickname:</div>
-                <input type="text" name="altnickname" class="disabled" value="test altnickname" disabled>
-
-                <div class="input-title">Ident:</div>
-                <input type="text" name="ident" class="disabled" value="test ident" disabled>
-            </form>
-        </div>
-
-        <div class="server-container">
-            <div class="server-title">Server (pre-filled)</div>
-            <form>
-                <div class="input-title">Server Name:</div>
-                <input type="text" name="servername" value="test servername">
-
-                <div class="input-title">Server Address:</div>
-                <input type="text" name="serveraddress" value="test serveraddress">
-
-                <div class="input-title">Nickname:</div>
-                <input type="text" name="nickname" value="test nickname">
-
-                <div class="input-title">Alt Nickname:</div>
-                <input type="text" name="altnickname" value="test altnickname">
-
-                <div class="input-title">Ident:</div>
-                <input type="text" name="ident" value="test ident">
-            </form>
-        </div>
+    <div id="servers-list"></div>
+    <div id="controls">
+        <button onclick="addServer()">Add Server</button>
     </div>
+
+    <script>
+        var serverEntrySource = "" +
+            "<div class='server-container'>" +
+                "<div class='server-title'>Server</div>" +
+                "<form>" +
+                    "<div class='input-title'>Server Name:</div>" +
+                    "<input type='text' name='servername' placeholder='Freenode' value='{{server.name}}'>" +
+                    "" +
+                    "<div class='input-title'>Server Address:</div>" +
+                    "<input type='text' name='serveraddress' placeholder='irc.freenode.net' value='{{server.address}}'>" +
+                    "" +
+                    "<div class='input-title'>Nickname:</div>" +
+                    "<input type='text' name='nickname' value='{{nickname}}'>" +
+                    "" +
+                    "<div class='input-title'>Alt Nickname:</div>" +
+                    "<input type='text' name='altnickname' value='{{altnickname}}'>" +
+                    "" +
+                    "<div class='input-title'>Ident:</div>" +
+                    "<input type='text' name='ident' value='{{ident}}'>" +
+                "</form>" +
+            "</div>" +
+        "";
+        var serverEntryTemplate = Handlebars.compile(serverEntrySource);
+
+        var serverEntryData = {
+            "server": {
+                "name": "Quakenet",
+                "address": "irc.quakenet.org"
+            },
+            "nickname" : "Test nickname",
+            "altnickname" : "Test altnickname",
+            "ident": "Test ident"
+        };
+
+        var serverEntry = serverEntryTemplate(serverEntryData);
+
+        var container = document.getElementById("servers-list");
+        container.innerHTML += serverEntry;
+
+        function addServer() {
+            container.innerHTML += serverEntry;
+        }
+    </script>
 </div>
 
 </body>
