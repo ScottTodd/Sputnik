@@ -10,6 +10,15 @@ html, body {
     border: none;
 }
 
+.banner {
+    max-height: 160px;
+    max-width: 618px;
+    margin: 0px auto 0px auto;
+    position: absolute;
+    left: 20%;
+    right: 5%;
+}
+
 #sputnik-content-container {
     background-color: #8F9E8B;
 }
