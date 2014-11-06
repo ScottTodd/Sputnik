@@ -4,7 +4,7 @@
     <title>Sputnik Web Interface</title>
 
     <!-- Thirt party styles -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="third-party/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="third-party/bootstrap-material-design/css/ripples.min.css" rel="stylesheet">
     <link href="third-party/bootstrap-material-design/css/material-wfont.min.css" rel="stylesheet">
 
@@ -16,7 +16,11 @@
 </head>
 <body>
 
-<div id="content-container">
+<div class="container well" id="sputnik-content-container">
+    <div class="page-header no-border">
+        <h1>Sputnik</h1>
+    </div>
+
     <div id="page-header">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -29,28 +33,121 @@
     <div id="controls">
         <a href="javascript:addServer()" class="btn btn-primary">Add Server</a>
     </div>
-    <div id="servers-list"></div>
+    <div id="sputnik-servers-form" class="well">
+        <form class="form-horizontal">
+            <legend>Server List</legend>
+            <div id="servers-list">
+
+            </div>
+        </form>
+    </div>
+
+
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Legend</legend>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputFile" class="col-lg-2 control-label">File</label>
+                <div class="col-lg-10">
+                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse...">
+                    <input type="file" id="inputFile" multiple="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea"></textarea>
+                    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Radios</label>
+                <div class="col-lg-10">
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                            Option one is this
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            Option two can be something else
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Selects</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <br>
+                    <select multiple="" class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
 
     <script>
         var serverEntrySource = "" +
-            "<div class='server-container'>" +
-                "<div class='server-title'>Server</div>" +
-                "<form>" +
-                    "<div class='input-title'>Server Name:</div>" +
-                    "<input type='text' name='servername' placeholder='Freenode' value='{{server.name}}'>" +
-                    "" +
-                    "<div class='input-title'>Server Address:</div>" +
-                    "<input type='text' name='serveraddress' placeholder='irc.freenode.net' value='{{server.address}}'>" +
-                    "" +
-                    "<div class='input-title'>Nickname:</div>" +
-                    "<input type='text' name='nickname' value='{{nickname}}'>" +
-                    "" +
-                    "<div class='input-title'>Alt Nickname:</div>" +
-                    "<input type='text' name='altnickname' value='{{altnickname}}'>" +
-                    "" +
-                    "<div class='input-title'>Ident:</div>" +
-                    "<input type='text' name='ident' value='{{ident}}'>" +
-                "</form>" +
+            "<div class='server-container panel panel-default'>" +
+                "<div class='server-title panel-heading'>" +
+                    "<h3 class='panel-title'>Server</h3>" +
+                "</div>" +
+                "<div class='panel-body'>" +
+                    "<form>" +
+                        "<div class='input-title'>Server Name:</div>" +
+                        "<input type='text' name='servername' placeholder='Freenode' value='{{server.name}}'>" +
+                        "" +
+                        "<div class='input-title'>Server Address:</div>" +
+                        "<input type='text' name='serveraddress' placeholder='irc.freenode.net' value='{{server.address}}'>" +
+                        "" +
+                        "<div class='input-title'>Nickname:</div>" +
+                        "<input type='text' name='nickname' value='{{nickname}}'>" +
+                        "" +
+                        "<div class='input-title'>Alt Nickname:</div>" +
+                        "<input type='text' name='altnickname' value='{{altnickname}}'>" +
+                        "" +
+                        "<div class='input-title'>Ident:</div>" +
+                        "<input type='text' name='ident' value='{{ident}}'>" +
+                    "</form>" +
+                "</div>" +
             "</div>" +
         "";
         var serverEntryTemplate = Handlebars.compile(serverEntrySource);
@@ -78,8 +175,8 @@
 
 <!-- Third party scripts -->
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+<script src="third-party/bootstrap/js/bootstrap.min.js"></script>
 <script src="third-party/bootstrap-material-design/js/ripples.min.js"></script>
 <script src="third-party/bootstrap-material-design/js/material.min.js"></script>
 
