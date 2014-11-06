@@ -20,6 +20,11 @@ html, body {
     padding: 8px;
 }
 
+#add-server-btn {
+    background-color: #5B7876;
+    color: #292929;
+}
+
 .server-container {
     background-color: #F2E6B6;
     margin: 4px 0px 12px 0px;
@@ -31,7 +36,7 @@ html, body {
 
 .server-title {
     font-size: 14pt;
-    background-color: #412A22;
+    background-color: #ECD195 !important;
 }
 
 .input-title {
