@@ -25,9 +25,32 @@ html, body {
     color: #292929;
 }
 
-.server-container {
+#servers-list {
+    overflow: hidden;
+}
+
+.server {
     background-color: #F2E6B6;
     margin: 4px 0px 12px 0px;
+}
+
+.server-container-initial {
+    -webkit-transform: translate(0px, 100%);
+       -moz-transform: translate(0px, 100%);
+        -ms-transform: translate(0px, 100%);
+         -o-transform: translate(0px, 100%);
+}
+
+.server-container-transition {
+    -webkit-transform: translate(0px, 0%);
+       -moz-transform: translate(0px, 0%);
+        -ms-transform: translate(0px, 0%);
+         -o-transform: translate(0px, 0%);
+
+    -webkit-transition: 1.5s ease-out;
+       -moz-transition: 1.5s ease-out;
+         -o-transition: 1.5s ease-out;
+            transition: 1.5s ease-out;
 }
 
 .server-container-disabled {

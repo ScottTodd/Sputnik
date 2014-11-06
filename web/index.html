@@ -37,7 +37,7 @@
         // TODO: Automatically rename duplicate form fields.
         // http://stackoverflow.com/questions/11380045/repeating-div-with-form-fields
         var serverEntrySource = "" +
-            "<div class='server-container panel panel-default'>" +
+            "<div class='server panel panel-default'>" +
                 "<div class='server-title panel-heading'>" +
                     "<h3 class='panel-title'>Server</h3>" +
                 "</div>" +
@@ -93,11 +93,19 @@
 
         var serverEntry = serverEntryTemplate(serverEntryData);
 
-        var container = document.getElementById("servers-list");
-        container.innerHTML += serverEntry;
+        var serversList = document.getElementById("servers-list");
+
+        addServer();
 
         function addServer() {
-            container.innerHTML += serverEntry;
+            var serverContainer = document.createElement('div');
+            serverContainer.className = 'server-container-initial';
+
+            serverContainer.innerHTML = serverEntry;
+            serversList.appendChild(serverContainer);
+            setTimeout(function() {
+                serverContainer.className += ' server-container-transition';
+            }, 100);
         }
     </script>
 </div>
