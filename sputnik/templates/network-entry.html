@@ -46,11 +46,8 @@
             </div>
         </div>
 
-        {% if network_controls %}
         <div class='pull-right'>
-            <a href='/edit/{{network_name}}/' class='btn btn-sputnik-secondary'>Edit</a>
-            <a href='#' class='btn btn-sputnik-secondary'>Delete</a>
+            {% block network_controls %}{% end %}
         </div>
-        {% end %}
     </div>
 </div>

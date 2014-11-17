@@ -1,12 +1,11 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div id="sputnik-networks-container" class="well form-horizontal">
+<div id='sputnik-networks-container' class='well form-horizontal'>
     <h3>Network List</h3>
-    <div id="networks-container-inner">
+    <div id='networks-container-inner'>
 
-        {% set network_controls = True %}
         {% set disabled = True %}
 
         {% for name, network in networks.items() %}
@@ -16,4 +15,9 @@
     </div>
 </div>
 
+{% end %}
+
+{% block network_controls %}
+    <a href='/edit/{{network_name}}/' class='btn btn-sputnik-secondary'>Edit</a>
+    <a href='#' class='btn btn-sputnik-secondary'>Delete</a>
 {% end %}
