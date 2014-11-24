@@ -18,6 +18,35 @@ class BaseHandler(tornado.web.RequestHandler):
 
         self.bouncer = bouncer
 
+    def get_current_user(self):
+        return self.get_secure_cookie("user")
+
+
+class LoginHandler(BaseHandler):
+    """The RequestHandler that serves the login page.
+
+    TODO: write docs
+    """
+
+    @tornado.web.addslash
+    def get(self):
+        """Renders the login page.
+
+        TODO: write docs
+        """
+
+        self.render("login.html")
+
+    @tornado.web.addslash
+    def post(self):
+        """Handles login requests.
+
+        TODO: write docs
+        """
+
+        self.set_secure_cookie("user", "lolsosecure")
+        self.redirect("/")
+
 
 class MainHandler(BaseHandler):
     """The main RequestHandler that serves the home page.
@@ -25,6 +54,7 @@ class MainHandler(BaseHandler):
     The home page displays the current list of networks.
     """
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def get(self):
         """Renders the home page.
@@ -43,6 +73,7 @@ class EditHandler(BaseHandler):
     new settings.
     """
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def get(self, network_name):
         """Renders the edit network page.
@@ -57,6 +88,7 @@ class EditHandler(BaseHandler):
         network = self.bouncer.networks[network_name]
         self.render("edit.html", network=network)
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def post(self, network_name):
         """Handles edit network requests.
@@ -91,6 +123,7 @@ class EditHandler(BaseHandler):
 class DeleteHandler(BaseHandler):
     """The RequestHandler that handles delete network requests."""
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def get(self, network_name):
         """Handles delete network requests.
@@ -111,6 +144,7 @@ class AddHandler(BaseHandler):
     is not added.
     """
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def get(self):
         """Renders the add network page.
@@ -121,6 +155,7 @@ class AddHandler(BaseHandler):
 
         self.render("add.html")
 
+    @tornado.web.authenticated
     @tornado.web.addslash
     def post(self):
         """Handles add network requests.
@@ -146,3 +181,32 @@ class AddHandler(BaseHandler):
                                      password=password)
 
         self.redirect("/")
+
+
+class PasswordHandler(BaseHandler):
+    """The RequestHandler that serves the edit password page.
+
+    TODO: docs
+    """
+
+    @tornado.web.authenticated
+    @tornado.web.addslash
+    def get(self):
+        """Renders the edit password page.
+
+        TODO: docs
+        """
+
+        self.render("password.html")
+
+    @tornado.web.authenticated
+    @tornado.web.addslash
+    def post(self):
+        """Handles edit password requests.
+
+        TODO: docs
+        """
+
+        self.clear_cookie("user")
+
+        self.render("password.html")
