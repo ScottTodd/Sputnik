@@ -9,6 +9,8 @@ ephemeral filesystems typical to most Platform-as-a-Service Providers (PaaS).
 import bcrypt
 import json
 import redis
+import os
+import urllib.parse
 
 
 class Datastore(object):
@@ -32,7 +34,12 @@ class Datastore(object):
             port (int): A port for a Redis instance.
         """
 
-        self.database = redis.StrictRedis(host=hostname, port=port, db=0)
+        url = urllib.parse.urlparse(os.environ.get("REDISCLOUD_URL"))
+
+        self.database = redis.StrictRedis(host=url.hostname,
+                                          port=url.port,
+                                          password=url.password,
+                                          db=0)
 
     def get_networks(self):
         """Retrieves all connected networks from Redis.
