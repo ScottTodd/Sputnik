@@ -6,7 +6,7 @@ point, the Bouncer is responsible for bootstrapping the entire program.
 
 import asyncio
 from client import Client
-from datastore import Datastore
+# from datastore import Datastore
 from network import Network
 from server import HTTPServer
 
@@ -33,11 +33,11 @@ class Bouncer(object):
 
         self.clients = set()
         self.networks = dict()
-        self.datastore = Datastore(hostname="localhost", port="6379")
+        # self.datastore = Datastore(hostname="localhost", port="6379")
 
-        history = self.datastore.get_networks()
-        for credentials in history.values():
-            self.add_network(**credentials)
+        # history = self.datastore.get_networks()
+        # for credentials in history.values():
+        #     self.add_network(**credentials)
 
     def start(self, hostname="", port=6667):
         """Starts the IRC and HTTP listen servers.
@@ -90,7 +90,7 @@ class Bouncer(object):
                         "port"     : port,
                         "password" : password }
 
-        self.datastore.add_network(**credentials)
+        # self.datastore.add_network(**credentials)
         loop = asyncio.get_event_loop()
         coro = loop.create_connection(lambda: Network(self, **credentials),
                                       hostname, port)
@@ -109,4 +109,4 @@ class Bouncer(object):
         if network in self.networks:
             self.networks[network].connected = False
             self.networks[network].transport.close()
-        self.datastore.remove_network(network)
+        # self.datastore.remove_network(network)
