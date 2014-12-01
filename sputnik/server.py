@@ -37,13 +37,14 @@ class HTTPServer(tornado.web.Application):
                   (r"/delete/(\w+)/?", handlers.DeleteHandler,   route_dict),
                   (r"/add/?",          handlers.AddHandler,      route_dict),
                   (r"/login/?",        handlers.LoginHandler,    route_dict),
-                  (r"/password/?",     handlers.PasswordHandler, route_dict),
+                  (r"/logout/?",       handlers.LogoutHandler,   route_dict),
+                  (r"/settings/?",     handlers.SettingsHandler, route_dict),
                   (r"/?",              handlers.MainHandler,     route_dict)]
 
         tornado.platform.asyncio.AsyncIOMainLoop().install()
         super().__init__(debug=os.environ.get("DEBUG"),
                          handlers=routes,
-                         cookie_secret="thisvalueissosecretwow",
+                         cookie_secret="cookiesecretneeded",
                          login_url="/login",
                          static_path="sputnik/static",
                          template_path="sputnik/templates")

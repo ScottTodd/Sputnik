@@ -22,32 +22,6 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.get_secure_cookie("user")
 
 
-class LoginHandler(BaseHandler):
-    """The RequestHandler that serves the login page.
-
-    TODO: write docs
-    """
-
-    @tornado.web.addslash
-    def get(self):
-        """Renders the login page.
-
-        TODO: write docs
-        """
-
-        self.render("login.html")
-
-    @tornado.web.addslash
-    def post(self):
-        """Handles login requests.
-
-        TODO: write docs
-        """
-
-        self.set_secure_cookie("user", "lolsosecure")
-        self.redirect("/")
-
-
 class MainHandler(BaseHandler):
     """The main RequestHandler that serves the home page.
 
@@ -183,8 +157,56 @@ class AddHandler(BaseHandler):
         self.redirect("/")
 
 
-class PasswordHandler(BaseHandler):
-    """The RequestHandler that serves the edit password page.
+class LoginHandler(BaseHandler):
+    """The RequestHandler that serves the login page.
+
+    TODO: write docs
+    """
+
+    @tornado.web.addslash
+    def get(self):
+        """Renders the login page.
+
+        TODO: write docs
+        """
+
+        self.render("login.html")
+
+    @tornado.web.addslash
+    def post(self):
+        """Handles login requests.
+
+        TODO: write docs
+        """
+
+        password = self.get_argument("password")
+
+        if password == self.bouncer.datastore.get_password():
+            self.set_secure_cookie("user", "securestringneeded")
+
+        self.redirect("/")
+
+
+class LogoutHandler(BaseHandler):
+    """The RequestHandler that handles log out requests.
+
+    TODO: write docs
+    """
+
+    @tornado.web.authenticated
+    @tornado.web.addslash
+    def get(self):
+        """Handles log out requests.
+
+        TODO: write docs
+        """
+
+        self.clear_cookie("user")
+        self.redirect("/")
+
+
+class SettingsHandler(BaseHandler):
+    """The RequestHandler that serves the settings page.
 
     TODO: docs
     """
@@ -192,21 +214,26 @@ class PasswordHandler(BaseHandler):
     @tornado.web.authenticated
     @tornado.web.addslash
     def get(self):
-        """Renders the edit password page.
+        """Renders the settings page.
 
         TODO: docs
         """
 
-        self.render("password.html")
+        self.render("settings.html")
 
     @tornado.web.authenticated
     @tornado.web.addslash
     def post(self):
-        """Handles edit password requests.
+        """Handles settings requests.
 
         TODO: docs
         """
 
-        self.clear_cookie("user")
+        current = self.get_argument("current-password")
+        new_1 = self.get_argument("new-password-1")
+        new_2 = self.get_argument("new-password-2")
 
-        self.render("password.html")
+        if current == self.bouncer.datastore.get_password() and new_1 == new_2:
+            self.bouncer.datastore.set_password(new_1)
+
+        self.render("settings.html")
