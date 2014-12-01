@@ -181,7 +181,7 @@ class LoginHandler(BaseHandler):
 
         password = self.get_argument("password")
 
-        if password == self.bouncer.datastore.get_password():
+        if self.bouncer.datastore.check_password(password):
             self.set_secure_cookie("user", "securestringneeded")
 
         self.redirect("/")
@@ -233,7 +233,7 @@ class SettingsHandler(BaseHandler):
         new_1 = self.get_argument("new-password-1")
         new_2 = self.get_argument("new-password-2")
 
-        if current == self.bouncer.datastore.get_password() and new_1 == new_2:
+        if self.bouncer.datastore.check_password(current) and new_1 == new_2:
             self.bouncer.datastore.set_password(new_1)
 
         self.render("settings.html")
