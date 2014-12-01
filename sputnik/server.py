@@ -57,4 +57,6 @@ class HTTPServer(tornado.web.Application):
             port (int, optional): The port to listen on. Defaults to 8080
         """
 
+        port = int(os.environ.get("PORT", port))
+
         tornado.httpserver.HTTPServer(self).listen(port)
