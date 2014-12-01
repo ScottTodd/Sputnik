@@ -182,8 +182,8 @@ class LoginHandler(BaseHandler):
 
         password = self.get_argument("password")
 
-        # if self.bouncer.datastore.check_password(password):
-        self.set_secure_cookie("user", "securestringneeded")
+        if self.bouncer.datastore.check_password(password):
+            self.set_secure_cookie("user", "securestringneeded")
 
         self.redirect("/")
 
